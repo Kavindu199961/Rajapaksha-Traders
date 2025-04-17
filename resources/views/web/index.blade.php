@@ -4,11 +4,11 @@
 
 @section('content')
 
-<section style="background-image: url('img/header.jpg');background-repeat: no-repeat;background-size: cover;">
+<section style="background-image: url('img/homehero.jpg');background-repeat: no-repeat;background-size: cover;">
       <div class="container-lg">
         <div class="row">
           <div class="col-lg-6 pt-5 mt-5">
-            <h2 class="display-1 ls-1"><span class="fw-bold primery-color">Rajapaksha</span>  <span class="fw-bold primery-color">Traders</span></h2>
+            <h2 class="display-1 ls-1"><span class="fw-bold text-white">Rajapaksha</span>  <span class="fw-bold text-white">Traders</span></h2>
             <p class="fs-4">Dignissim massa diam elementum.</p>
             <div class="d-flex gap-3">
               <a href="#" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Start Shopping</a>

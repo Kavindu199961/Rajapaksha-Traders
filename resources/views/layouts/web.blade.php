@@ -146,7 +146,7 @@
                 <a href="/contact" class="nav-link">Contact</a>
               </li>
               <li class="nav-item active">
-                <a href="/transport" class="nav-link">Transport</a>
+                <a href="/transport" class="nav-link">Book Transport</a>
               </li>
               <li class="nav-item active">
                 <a href="/story" class="nav-link">Our Story</a>
