@@ -35,10 +35,10 @@
                     $discount = 100 - ($item->real_price / $item->regular_price * 100);
                   @endphp
                   @if($discount > 0)
-                    <span class="badge bg-light text-secondary fs-7">{{ round($discount) }}% OFF</span>
+                    <span class="badge bg-warning text-secondary fs-7">{{ round($discount) }}% OFF</span>
                   @endif
                 </div>
-                <a href="#" class="btn btn-primary btn-sm rounded-1 w-100">
+                <a href="https://wa.me/94714829005?text={{ urlencode("I'm interested in " . $item->name . " priced at Rs." . number_format($item->real_price, 2)) }}" class="btn btn-primary btn-sm rounded-1 w-100">
                   <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Whatsapp
                 </a>
               </div>

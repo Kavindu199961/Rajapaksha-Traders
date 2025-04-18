@@ -4,57 +4,46 @@
 <div class="container py-4">
   <h2 class="mb-4">Items in Category: {{ $category->name }}</h2>
 
-  <div class="row g-4">
-    @foreach($category->items as $item)
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="product-item p-3 shadow-sm rounded border bg-white h-100 d-flex flex-column justify-content-between">
-          
-          <!-- Image -->
-          <figure class="text-center mb-3">
-            <a href="{{ route('web.show', $item->id) }}">
-              <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/placeholder.png') }}"
-                  alt="{{ $item->name }}"
-                  class="img-fluid"
-                  style="height: 180px; object-fit: contain;">
-            </a>
-          </figure>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-5">
+  @foreach($category->items as $item)
+    <div class="col">
+      <div class="product-item card border-0 shadow-sm h-100">
+        <figure class="mb-0">
+          <a href="{{ route('web.show', $item->id) }}" title="{{ $item->name }}">
+            <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/placeholder.png') }}"
+                 alt="{{ $item->name }}"
+                 class="tab-image w-100"
+                 style="object-fit: cover; height: 200px;">
+          </a>
+        </figure>
+        <div class="card-body text-center p-2">
+          <h3 class="fs-6 fw-normal mb-1">{{ $item->name }}</h3>
+          <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+            @if($item->regular_price > $item->real_price)
+              <del class="text-muted small">Rs.{{ number_format($item->regular_price, 2) }}</del>
+            @endif
+            <span class="text-dark fw-semibold">Rs.{{ number_format($item->real_price, 2) }}</span>
 
-          <!-- Product Info -->
-          <div class="text-center mb-3">
-            <h3 class="fs-6 fw-bold mb-2">{{ $item->name }}</h3>
-            <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
-              @if($item->regular_price > $item->real_price)
-                <del class="text-muted">Rs.{{ number_format($item->regular_price, 2) }}</del>
-              @endif
-              <span class="text-dark fw-semibold">Rs.{{ number_format($item->real_price, 2) }}</span>
-              @php
-                $discount = ($item->regular_price > 0 && $item->regular_price > $item->real_price)
-                    ? round(100 - ($item->real_price / $item->regular_price * 100))
-                    : 0;
-              @endphp
-              @if($discount > 0)
-                <span class="badge bg-warning text-dark rounded-1 px-2">
-                  {{ $discount }}% OFF
-                </span>
-              @endif
-            </div>
+            @php
+              $discount = ($item->regular_price > 0 && $item->regular_price > $item->real_price)
+                  ? round(100 - ($item->real_price / $item->regular_price * 100))
+                  : 0;
+            @endphp
+
+            @if($discount > 0)
+              <span class="badge bg-warning text-secondary fs-7">{{ round($discount) }}% OFF</span>
+            @endif
           </div>
-
-          <!-- Buttons -->
-          <div class="row g-1 align-items-center mt-auto">
-            
-          <div class="col-6 d-flex justify-content-center">
-            <a href="#" class="btn btn-sm btn-success w-100 rounded-1 btn-cart align-items-center">
-                <svg width="16" height="16"><use xlink:href="#cart"></use></svg> Whatsapp
-            </a>
-            </div>
-            
-          </div>
-
+          <a href="https://wa.me/94714829005?text={{ urlencode("I'm interested in " . $item->name . " priced at Rs." . number_format($item->real_price, 2)) }}"
+             class="btn btn-primary btn-sm rounded-1 w-100">
+            <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Whatsapp
+          </a>
         </div>
       </div>
-    @endforeach
-  </div>
+    </div>
+  @endforeach
+</div>
+
 </div>
 
 <style>

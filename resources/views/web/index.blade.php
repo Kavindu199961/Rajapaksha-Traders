@@ -96,8 +96,9 @@
         <div class="col-md-12">
           <div class="category-carousel swiper">
             <div class="swiper-wrapper d-flex flex-row">
-              @foreach($categories as $category)
-                <div class="text-center mx-3 swiper-slide">
+            @foreach($categories as $category)
+              <div class="text-center mx-3 swiper-slide">
+                <a href="{{ route('web.items', $category->id) }}" class="nav-link d-flex flex-column align-items-center gap-2 text-dark p-2">
                   <img 
                     src="{{ $category->image ? asset('storage/' . $category->image) : asset('images/default-category.jpg') }}" 
                     class="rounded-circle" 
@@ -105,8 +106,10 @@
                     style="width:150px; height:150px; object-fit:cover;"
                   >
                   <h4 class="mt-2 fw-bold category-title" style="font-size: 1.25rem;">{{ $category->name }}</h4>
-                </div>
-              @endforeach
+                </a>
+              </div>
+            @endforeach
+
             </div>
           </div>
         </div>
@@ -157,10 +160,10 @@
                     $discount = 100 - ($item->real_price / $item->regular_price * 100);
                   @endphp
                   @if($discount > 0)
-                    <span class="badge bg-light text-secondary fs-7">{{ round($discount) }}% OFF</span>
+                    <span class="badge bg-warning text-secondary fs-7">{{ round($discount) }}% OFF</span>
                   @endif
                 </div>
-                <a href="#" class="btn btn-primary btn-sm rounded-1 w-100">
+                <a href="https://wa.me/94714829005?text={{ urlencode("I'm interested in " . $item->name . " priced at Rs." . number_format($item->real_price, 2)) }}" class="btn btn-primary btn-sm rounded-1 w-100">
                   <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Whatsapp
                 </a>
               </div>

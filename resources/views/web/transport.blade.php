@@ -18,6 +18,10 @@
 @section('content')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
 
 <div class="transport-page">
     <!-- Hero Section -->
@@ -154,40 +158,40 @@
             <div class="col-lg-8">
                 <div class="card border-0 hire-card" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                     <div class="card-body p-4 p-md-5">
-                        <div class="text-center mb-5">
-                            <div class="icon-box bg-primary bg-opacity-10 text-primary d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 70px; height: 70px;">
-                                <i class="bi bi-truck fs-3"></i>
+                    <div class="text-center mb-5">
+                    
+                        <i class="bi bi-truck fs-1"></i>
+                   
+                        <h2 class="fw-bold mb-2" style="color: #2c3e50;">Book Your Lorry Transport</h2>
+                        <p class="text-muted">Quick and reliable logistics solutions at your fingertips</p>
+                    </div>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 p-4 text-center" style="border-radius: 12px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                                
+                                    <i class="bi bi-whatsapp fs-4"></i><br>
+                                
+                                <h4 class="mb-2" style="color: #2c3e50;">Instant WhatsApp Booking</h4>
+                                <p class="text-muted mb-3">Get immediate confirmation via WhatsApp</p>
+                                <a href="https://wa.me/+94714829005" class="btn btn-success rounded-pill px-4" style="background-color: #25D366; border-color: #25D366;">
+                                    <i class="bi bi-whatsapp me-2"></i> Message Now
+                                </a>
                             </div>
-                            <h2 class="fw-bold mb-2" style="color: #2c3e50;">Book Your Lorry Transport</h2>
-                            <p class="text-muted">Quick and reliable logistics solutions at your fingertips</p>
                         </div>
+                        <div class="col-md-6">
+                        <div class="card h-100 border-0 p-4 text-center" style="border-radius: 12px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
+                            
+                            <i class="bi bi-telephone fs-4"></i><br> 
                         
-                        <div class="row g-4 mb-4">
-                            <div class="col-md-6">
-                                <div class="card h-100 border-0 p-4 text-center" style="border-radius: 12px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
-                                    <div class="icon-box bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
-                                        <i class="bi bi-whatsapp fs-4"></i>
-                                    </div>
-                                    <h4 class="mb-2" style="color: #2c3e50;">Instant WhatsApp Booking</h4>
-                                    <p class="text-muted mb-3">Get immediate confirmation via WhatsApp</p>
-                                    <a href="https://wa.me/+94714829005" class="btn btn-success rounded-pill px-4" style="background-color: #25D366; border-color: #25D366;">
-                                        <i class="bi bi-whatsapp me-2"></i> Message Now
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card h-100 border-0 p-4 text-center" style="border-radius: 12px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease;">
-                                    <div class="icon-box bg-primary bg-opacity-10 text-primary d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
-                                        <i class="bi bi-telephone fs-4"></i>
-                                    </div>
-                                    <h4 class="mb-2" style="color: #2c3e50;">Direct Call Booking</h4>
-                                    <p class="text-muted mb-3">Speak with our transport manager</p>
-                                    <a href="tel:+94714829005" class="btn btn-primary rounded-pill px-4">
-                                        <i class="bi bi-telephone me-2"></i> Call Now
-                                    </a>
-                                </div>
-                            </div>
+                            <h4 class="mb-2" style="color: #2c3e50;">Direct Call Booking</h4>
+                            <p class="text-muted mb-3">Speak with our transport manager</p>
+                            <a href="tel:+94714829005" class="btn btn-primary rounded-pill px-4">
+                            <i class="bi bi-telephone me-2"></i> Call Now
+                            </a>
                         </div>
+                        </div>
+                    </div>
                         
                         <div class="or-divider my-4 position-relative text-center">
                             <hr class="m-0" style="border-top: 1px dashed #dee2e6;">
@@ -210,7 +214,7 @@
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label fw-medium">Phone Number <span class="text-danger">*</span></label>
                                         <div class="input-group">
-                                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-phone text-muted"></i></span>
+                                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-telephone text-muted"></i></span>
                                             <input type="tel" class="form-control border-start-0" id="phone" name="phone" placeholder="+94 71 482 9005 " required>
                                         </div>
                                         <div class="invalid-feedback">Please provide a valid phone number.</div>
@@ -459,7 +463,7 @@
                 <div class="col-md-4">
                     <div class="card h-100 border-0 shadow-sm price-card">
                         <div class="card-header bg-primary text-white text-center py-3">
-                            <h4 class="fw-bold mb-0">Daily Hire</h4>
+                            <h4 class="fw-bold mb-0 text-white">Daily Hire</h4>
                         </div>
                         <div class="card-body text-center">
                             <h3 class="fw-bold my-3">Rs. 8,000</h3>
@@ -495,7 +499,7 @@
                 <div class="col-md-4">
                     <div class="card h-100 border-0 shadow-sm price-card">
                         <div class="card-header bg-primary text-white text-center py-3">
-                            <h4 class="fw-bold mb-0">Monthly Rental</h4>
+                            <h4 class="fw-bold mb-0 text-white">Monthly Rental</h4>
                         </div>
                         <div class="card-body text-center">
                             <h3 class="fw-bold my-3">Rs. 150,000</h3>
@@ -606,6 +610,8 @@
         background-color: #2c3e50 !important;
     }
 </style>
+
+
 @endsection
 
 @section('scripts')

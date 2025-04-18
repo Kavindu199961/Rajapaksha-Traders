@@ -25,7 +25,7 @@
                     $discount = 100 - ($item->real_price / $item->regular_price * 100);
                 @endphp
                 @if($discount > 0)
-                    <span class="badge bg-success text-white mb-3">{{ round($discount) }}% OFF</span>
+                    <span class="badge bg-warning text-secondary fs-7">{{ round($discount) }}% OFF</span>
                 @endif
 
                 <h5 class="text-muted">Description</h5>
@@ -35,10 +35,10 @@
                 <p class="text-dark">{{ $item->category->name ?? 'N/A' }}</p>
 
                 {{-- WhatsApp Button --}}
-                <a href="https://wa.me/?text=I'm%20interested%20in%20{{ urlencode($item->name) }}%20priced%20at%20Rs.{{ number_format($item->real_price, 2) }}"
-                   class="btn btn-success btn-lg mt-3" target="_blank">
-                    <i class="bi bi-whatsapp"></i> Contact via WhatsApp
-                </a>
+                <a href="https://wa.me/94714829005?text={{ urlencode("I'm interested in " . $item->name . " priced at Rs." . number_format($item->real_price, 2)) }}"
+                    class="btn btn-success btn-lg mt-3" target="_blank">
+                        <i class="bi bi-whatsapp"></i> Contact via WhatsApp
+                    </a>
             </div>
         </div>
     </div>
