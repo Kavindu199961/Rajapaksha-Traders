@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <h2 class="fw-bold primery-color mb-4">Our Story</h2>
-                    <p>Founded in 1995 by Mr. Sunil Rajapaksha, Rajapaksha Traders began as a small neighborhood shop with a vision to provide quality products at affordable prices to our community.</p>
+                    <p>Founded in 1995 by Mr. Rajapaksha, Rajapaksha Traders began as a small neighborhood shop with a vision to provide quality products at affordable prices to our community.</p>
                     <p>Over the years, we've grown into one of the most trusted retail stores in the area, serving generations of families with the same commitment to quality and service that we started with.</p>
                     <p>Today, under the leadership of the second generation, we continue to innovate while staying true to our core values.</p>
                 </div>

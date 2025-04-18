@@ -68,7 +68,7 @@
                             <h4 class="fw-bold">Construction Materials</h4>
                             <p>Specialized transport for construction supplies</p>
                             <ul class="text-start ps-4">
-                                <li>Sand, cement, bricks</li>
+                                <li>Cement, bricks</li>
                                 <li>Metal rods & timber</li>
                                 <li>Debris removal</li>
                             </ul>
@@ -138,18 +138,35 @@
                 <div class="col-lg-6">
                     <div class="vehicle-gallery">
                         <div class="main-image mb-3">
-                            <img src="{{ asset('images/lorry-main.jpg') }}" alt="Our Lorry" class="img-fluid rounded shadow">
+                            <img src="{{ asset('img/lorry1.jpg') }}" alt="Our Lorry" class="img-fluid rounded shadow">
                         </div>
                         <div class="thumbnail-row d-flex gap-2">
-                            <img src="{{ asset('images/lorry-1.jpg') }}" alt="Lorry Side View" class="img-thumbnail active">
-                            <img src="{{ asset('images/lorry-2.jpg') }}" alt="Lorry Rear View" class="img-thumbnail">
-                            <img src="{{ asset('images/lorry-3.jpg') }}" alt="Lorry Interior" class="img-thumbnail">
+                            <img src="{{ asset('img/lorry3.jpg') }}" alt="Lorry Side View" class="img-thumbnail preview-img" data-bs-toggle="modal" data-bs-target="#imageModal">
+                            <img src="{{ asset('img/lorry2.jpeg') }}" alt="Lorry Rear View" class="img-thumbnail preview-img" data-bs-toggle="modal" data-bs-target="#imageModal">
+                            <img src="{{ asset('img/lorry4.png') }}" alt="Lorry Interior" class="img-thumbnail preview-img" data-bs-toggle="modal" data-bs-target="#imageModal">
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Image Preview Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-light">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="imageModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid rounded shadow" alt="Preview Image">
+            </div>
+            </div>
+        </div>
+        </div>
+
 
     <!-- Hire Now Section -->
     <section id="hire-now" class="py-5" style="background-color:rgb(186, 189, 183);">
@@ -449,6 +466,20 @@
             }
         });
     });
+
+  
+    document.addEventListener("DOMContentLoaded", function () {
+        const previewImgs = document.querySelectorAll(".preview-img");
+        const modalImage = document.getElementById("modalImage");
+
+        previewImgs.forEach(img => {
+            img.addEventListener("click", function () {
+                modalImage.src = this.src;
+            });
+        });
+    });
+
+
     </script>
 </section>
 
