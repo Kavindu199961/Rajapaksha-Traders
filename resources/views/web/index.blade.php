@@ -2,6 +2,19 @@
 
 @section('title', 'Home - Rajapaksha Traders')
 
+@section('meta')
+    <meta name="description" content="Rajapaksha Traders Galigamuwa Kobbawala - Your trusted retail shop in Sri Lanka for milk, chocolate, rice, sugar, and various household items. Best prices and quality products.">
+    <meta name="keywords" content="Rajapaksha Traders, Galigamuwa, Kobbawala, Sri Lanka retail shop, milk, chocolate, rice, sugar, grocery items, household items">
+    <meta name="author" content="Rajapaksha Traders">
+    <meta property="og:title" content="Rajapaksha Traders - Retail Shop in Galigamuwa Kobbawala">
+    <meta property="og:description" content="Your trusted retail shop in Sri Lanka for milk, chocolate, rice, sugar, and various household items.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}"> <!-- Replace with your actual logo path -->
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Rajapaksha Traders - Retail Shop Galigamuwa Kobbawala | Sri Lanka</title>
+@endsection
+
 @section('content')
 
 <section style="background-image: url('img/homehero.jpg');background-repeat: no-repeat;background-size: cover;">
@@ -37,46 +50,26 @@
     </section>
 
     <!-- banner section -->
-
-    <section class="py-3">
-  <div class="container-lg">
-    <div class="row g-3">
-      
-      {{-- Left side: Large banner (1st ad) --}}
-      @if($ads->count() >= 1)
-      <div class="col-md-6">
-        <div class="banner-ad d-flex align-items-center h-100 "
-             style="background: url('{{ asset('storage/' . $ads[0]->image) }}') no-repeat center center; background-size: cover;">
-          <div class="banner-content p-5 w-100">
-            <div class="content-wrapper text-light">
-              <h3 class="banner-title text-light">{{ $ads[0]->title }}</h3>
-              <p>{{ $ads[0]->description ?? '' }}</p>
-              <a href="#" class="btn-link text-white fw-bold">SHOP NOW</a>
-            </div>
-          </div>
+    <section>
+    <div class="container-fluid px-5 my-5">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Today's Offers</h2>
         </div>
-      </div>
-      @endif
-
-      {{-- Right side: 3 stacked smaller banners --}}
-      <div class="col-md-6 d-flex flex-column gap-3">
-        @foreach($ads->slice(1, 3) as $ad)
-        <div class="banner-ad flex-fill"
-             style="background: url('{{ asset('storage/' . $ad->image) }}') no-repeat center center; background-size: cover; min-height: 32%;">
-          <div class="banner-content p-4 h-100 d-flex align-items-start">
-            <div class="content-wrapper text-light">
-              <h3 class="banner-title text-light">{{ $ad->title }}</h3>
-              <p>{{ $ad->description ?? '' }}</p>
-              <a href="#" class="btn-link text-white fw-bold">SHOP NOW</a>
-            </div>
-          </div>
+        <div class="row g-4 justify-content-center">
+            @foreach ($ads->take(4) as $ad)
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="ad-item text-center">
+                        <img src="{{ asset('storage/' . $ad->image) }}" alt="{{ $ad->alt_text }}"
+                             class="img-fluid rounded shadow"
+                             style="width: 100%; height: 400px; object-fit: cover;">
+                        <!-- <h5 class="mt-3">{{ $ad->title }}</h5> -->
+                    </div>
+                </div>
+            @endforeach
         </div>
-        @endforeach
-      </div>
-
     </div>
-  </div>
 </section>
+
 
 <!-- category section -->
 
@@ -89,7 +82,7 @@
               <h2 class="section-title">Category</h2>
 
               <div class="d-flex align-items-center">
-                <a href="#" class="btn btn-primary me-2">View All</a>
+             <a href="#" class="btn btn-primary me-2">View All</a>
                 <div class="swiper-buttons">
                   <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
                   <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
@@ -133,10 +126,9 @@
           <h2 class="section-title">Featured Products</h2>
 
           <div class="d-flex align-items-center">
-            <a href="{{ route('items.index') }}" class="btn btn-primary me-2">View All</a>
+            <a href="/products" class="btn btn-primary me-2">View All</a>
             <div class="swiper-buttons">
-              <button class="swiper-prev products-carousel-prev btn btn-primary">❮</button>
-              <button class="swiper-next products-carousel-next btn btn-primary">❯</button>
+              
             </div>  
           </div>
         </div>
@@ -144,111 +136,112 @@
       </div>
     </div>
     
-    <div class="row">
-      <div class="col-md-12">
-
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            @foreach($items as $item)
-              <div class="product-item swiper-slide">
-                <figure>
-                  <a href="{{ route('items.show', $item->id) }}" title="{{ $item->name }}">
-                    <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/placeholder.png') }}" alt="{{ $item->name }}" class="tab-image">
-                  </a>
-                </figure>
-                <div class="d-flex flex-column text-center">
-                  <h3 class="fs-6 fw-normal">{{ $item->name }}</h3>
-                  <div class="d-flex justify-content-center align-items-center gap-2">
-                    <del>Rs.{{ number_format($item->regular_price, 2) }}</del>
-                    <span class="text-dark fw-semibold">Rs.{{ number_format($item->real_price, 2) }}</span>
-
-                    @php
-                      $discount = 100 - ($item->real_price / $item->regular_price * 100);
-                    @endphp
-                    @if($discount > 0)
-                      <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">
-                        {{ round($discount) }}% OFF
-                      </span>
-                    @endif
-                  </div>
-                  <div class="button-area p-3 pt-0">
-                    <div class="row g-1 mt-2">
-                      <div class="col-3">
-                        
-                      </div>
-                      <div class="col-7">
-                        <a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
-                          <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Whatsapp
-                        </a>
-                      </div>
-                      <div class="col-2">
-                       
-                          
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+    <div class="container py-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row g-5">
+        @foreach($items as $item)
+          <div class="col-6 col-md-3">
+            <div class="product-item card border-0 shadow-sm h-100">
+              <figure class="mb-0">
+                <a href="{{ route('web.show', $item->id) }}" title="{{ $item->name }}">
+                  <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/placeholder.png') }}" alt="{{ $item->name }}" class="tab-image w-100" style="object-fit: cover; height: 200px;">
+                </a>
+              </figure>
+              <div class="card-body text-center p-2">
+                <h3 class="fs-6 fw-normal mb-1">{{ $item->name }}</h3>
+                <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                  <del class="text-muted small">Rs.{{ number_format($item->regular_price, 2) }}</del>
+                  <span class="text-dark fw-semibold">Rs.{{ number_format($item->real_price, 2) }}</span>
+                  @php
+                    $discount = 100 - ($item->real_price / $item->regular_price * 100);
+                  @endphp
+                  @if($discount > 0)
+                    <span class="badge bg-light text-secondary fs-7">{{ round($discount) }}% OFF</span>
+                  @endif
                 </div>
+                <a href="#" class="btn btn-primary btn-sm rounded-1 w-100">
+                  <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Whatsapp
+                </a>
               </div>
-            @endforeach
+            </div>
           </div>
-        </div>
-
+        @endforeach
       </div>
-    </div>
   </div>
 </section>
 
 <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
-          <div class="col">
-            <div class="card border-0 bg-primary rounded-0 p-4 text-light">
-              <div class="row">
-                <div class="col-md-3 text-center">
-                  <svg width="60" height="60"><use xlink:href="#fresh"></use></svg>
-                </div>
-                <div class="col-md-9">
-                  <div class="card-body p-0">
-                    <h5 class="text-light">Fresh from farm</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card border-0 bg-secondary rounded-0 p-4 text-light">
-              <div class="row">
-                <div class="col-md-3 text-center">
-                  <svg width="60" height="60"><use xlink:href="#organic"></use></svg>
-                </div>
-                <div class="col-md-9">
-                  <div class="card-body p-0">
-                    <h5 class="text-light">100% Organic</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card border-0 bg-danger rounded-0 p-4 text-light">
-              <div class="row">
-                <div class="col-md-3 text-center">
-                  <svg width="60" height="60"><use xlink:href="#delivery"></use></svg>
-                </div>
-                <div class="col-md-9">
-                  <div class="card-body p-0">
-                    <h5 class="text-light">Free delivery</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <!-- SVG Definitions (hidden) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="premium" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </symbol>
+    <symbol id="variety" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm6 11h-3v3h-2v-3H8v-2h3v-3h2v3h3v2z"/>
+    </symbol>
+    <symbol id="fast-delivery" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm1.5-9H17V12h4.46L19.5 9.5zM6 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 8l3 4v5h-2c0 1.66-1.34 3-3 3s-3-1.34-3-3H9c0 1.66-1.34 3-3 3s-3-1.34-3-3H1V6c0-1.11.89-2 2-2h14v4h3zM15 8H3v3h12V8zm0 5H3v3h12v-3z"/>
+    </symbol>
+  </svg>
+
+  <!-- Premium Quality Card -->
+  <div class="col">
+    <div class="card border-0 bg-primary rounded-0 p-4 text-light h-100">
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <svg width="60" height="60" fill="white">
+            <use xlink:href="#premium"></use>
+          </svg>
+        </div>
+        <div class="col-md-9">
+          <div class="card-body p-0">
+            <h5 class="text-light">Premium Quality</h5>
+            <p class="card-text">Finest selection of rice, dairy, biscuits & chocolates with guaranteed quality.</p>
           </div>
         </div>
-      
       </div>
-  
+    </div>
+  </div>
+
+  <!-- Wide Selection Card -->
+  <div class="col">
+    <div class="card border-0 bg-secondary rounded-0 p-4 text-light h-100">
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <svg width="60" height="60" fill="white">
+            <use xlink:href="#variety"></use>
+          </svg>
+        </div>
+        <div class="col-md-9">
+          <div class="card-body p-0">
+            <h5 class="text-light">Wide Selection</h5>
+            <p class="card-text">From aromatic basmati to creamy chocolates - all in one place.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fast Delivery Card -->
+  <div class="col">
+    <div class="card border-0 bg-danger rounded-0 p-4 text-light h-100">
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <svg width="60" height="60" fill="white">
+            <use xlink:href="#fast-delivery"></use>
+          </svg>
+        </div>
+        <div class="col-md-9">
+          <div class="card-body p-0">
+            <h5 class="text-light">Fast Delivery</h5>
+            <p class="card-text">Same-day delivery for orders before 3pm. Free delivery on orders over Rs6000.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

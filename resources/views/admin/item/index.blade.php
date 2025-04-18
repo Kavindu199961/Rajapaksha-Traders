@@ -5,16 +5,28 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Items</h2>
+            <h2 class="mb-0 justify-content-center fs-2">Items</h2>
             <a href="{{ route('items.create') }}" class="btn btn-success shadow-sm">
                 <i class="fas fa-plus-circle me-1"></i> Add Item
             </a>
         </div>
 
+        <!-- Search form -->
+        <form action="{{ route('items.index') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search item name..." value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+
+        <!-- Table -->
         <div class="table-responsive">
             <table class="table table-hover table-striped align-middle border shadow rounded">
                 <thead class="table-dark">
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Regular Price (LKR)</th>
@@ -24,8 +36,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($items as $item)
+                    @forelse ($items as $index => $item)
                         <tr>
+                            <td>{{ ($items->currentPage() - 1) * $items->perPage() + $index + 1 }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->category->name }}</td>
                             <td><span class="text-muted">{{ number_format($item->regular_price, 2) }}</span></td>
@@ -51,11 +64,17 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No items found.</td>
+                            <td colspan="7" class="text-center text-muted">No items found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        <div class="mt-3">
+            {{ $items->links() }}
+        </div>
     </div>
 @endsection
+

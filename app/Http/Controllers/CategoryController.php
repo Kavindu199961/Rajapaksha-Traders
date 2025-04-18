@@ -11,7 +11,7 @@ class CategoryController extends Controller
 public function showCategoryItems($id)
 {
     $category = Category::with('items')->findOrFail($id);
-    return view('admin.category.items', compact('category'));
+    return view('web.items', compact('category'));
 }
 
 public function show()
@@ -19,9 +19,17 @@ public function show()
     $categories = Category::orderBy('id', 'desc')->get();
     return view('layouts.web', compact('categories'));
 }
-public function index()
+public function index(Request $request)
 {
-    $categories = Category::orderBy('id', 'desc')->get();
+    $query = Category::latest();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('name', 'like', "%{$search}%");
+    }
+
+    $categories = $query->paginate(10)->withQueryString();
+
     return view('admin.category.index', compact('categories'));
 }
 

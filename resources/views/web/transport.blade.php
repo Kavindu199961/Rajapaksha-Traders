@@ -2,6 +2,19 @@
 
 @section('title', 'Transport & Hire Services - Rajapaksha Traders')
 
+@section('meta')
+    <meta name="description" content="Rajapaksha Transport - Reliable transportation services in Sri Lanka. Offering goods transport, logistics solutions, and freight services with professional handling and timely deliveries.">
+    <meta name="keywords" content="Rajapaksha Transport, Sri Lanka transport services, goods transportation, logistics solutions, freight services, cargo transport, delivery services">
+    <meta name="author" content="Rajapaksha Transport">
+    <meta property="og:title" content="Rajapaksha Transport - Professional Transport Services in Sri Lanka">
+    <meta property="og:description" content="Your trusted partner for transportation and logistics solutions in Sri Lanka. Reliable goods transport and freight services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('img/lorry.jpg') }}"> <!-- Replace with your actual transport company logo -->
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Rajapaksha Transport | Professional Goods Transport & Logistics Services | Sri Lanka</title>
+@endsection
+
 @section('content')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">

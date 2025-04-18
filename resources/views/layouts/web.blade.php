@@ -5,12 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="author" content="">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @yield('meta')
+    
+    <!-- Default meta tags (fallback if not defined in child view) -->
+    @hasSection('meta')
+    @else
+    <meta name="description" content="Rajapaksha Traders - Your trusted retail shop in Galigamuwa Kobbawala, Sri Lanka">
+    <meta name="keywords" content="Rajapaksha Traders, grocery, retail shop, Sri Lanka">
+    <title>Rajapaksha Traders - Retail Shop in Galigamuwa Kobbawala</title>
+    @endif
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
@@ -104,58 +111,72 @@
 
     </div>
 
-    <header>
-      <div class="container-fluid">
-        <div class="row py-3 border-bottom">
-          
-          <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
-            <div class="d-flex align-items-center my-3 my-sm-0">
-              <a href="index.html">
-                <img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid">
-              </a>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-              aria-controls="offcanvasNavbar">
-              <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#menu"></use></svg>
+    <header class="sticky-top bg-white shadow-sm">
+  <div class="container-fluid">
+    <!-- Top Row - Logo, Search, Menu Toggle -->
+    <div class="row align-items-center py-2">
+      <!-- Logo and Mobile Menu Toggle -->
+      <div class="col-md-2 col-6 d-flex align-items-center gap-3">
+        <a href="/" class="d-inline-block py-2">
+          <img src="{{ asset('img/logo.png') }}" alt="logo" class="img-fluid" style="height: 85px; width: auto;">
+        </a>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler d-md-none border-0 p-0" type="button" 
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+          <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#menu"></use></svg>
+        </button>
+      </div>
+      
+      <!-- Search Bar - Centered -->
+      <div class="col-md-8 col-12 order-md-1 order-3 mt-2 mt-md-0">
+        <form id="search-form" action="{{ route('items.search') }}" method="GET" class="d-flex justify-content-center">
+          <div class="input-group searchinput" style="max-width: 700px; margin-right: 50%;">
+            <input type="text" name="query" class="form-control border-end-0 border-dark-subtle py-2 px-3" 
+                   placeholder="Search over 20,000 products..." required>
+            <button type="submit" class="btn btn-dark px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+              </svg>
             </button>
           </div>
-          
-          <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">
-            <div class="search-bar row bg-light p-2 rounded-4">
-              
-              <div class="col-11 col-md-7">
-                <form id="search-form" class="text-center" action="index.html" method="post">
-                  <input type="text" class="form-control border-0 bg-transparent" placeholder="Search for more than 20,000 products">
-                </form>
-              </div>
-              <div class="col-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/></svg>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-              <li class="nav-item active">
-                <a href="/" class="nav-link">Home</a>
-              </li>
-              <li class="nav-item active">
-                <a href="/about" class="nav-link">About</a>
-              </li>
-              <li class="nav-item active">
-                <a href="/contact" class="nav-link">Contact</a>
-              </li>
-              <li class="nav-item active">
-                <a href="/transport" class="nav-link">Book Transport</a>
-              </li>
-              <li class="nav-item active">
-                <a href="/story" class="nav-link">Our Story</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+        </form>
       </div>
-      </header>
+      
+      <!-- Empty column for alignment -->
+      <div class="col-md-2 d-none d-md-block"></div>
+    </div>
+    
+    <!-- Bottom Row - Navigation -->
+    <div class="row border-top py-2 d-none d-md-flex">
+      <div class="col-12">
+        <nav class="d-flex justify-content-center">
+          <ul class="nav list-unstyled d-flex flex-wrap gap-1 gap-lg-4 mb-0 fw-semibold text-uppercase">
+            <li class="nav-item">
+              <a href="/" class="nav-link px-2 py-1 text-dark hover-primary">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="/about" class="nav-link px-2 py-1 text-dark hover-primary">About</a>
+            </li>
+            <li class="nav-item">
+              <a href="/products" class="nav-link px-2 py-1 text-dark hover-primary">Products</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact" class="nav-link px-2 py-1 text-dark hover-primary">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="/transport" class="nav-link px-2 py-1 text-dark hover-primary">Transport</a>
+            </li>
+            <li class="nav-item">
+              <a href="/story" class="nav-link px-2 py-1 text-dark hover-primary">Our Story</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
 
       <main>
         @yield('content')

@@ -11,7 +11,7 @@
           
           <!-- Image -->
           <figure class="text-center mb-3">
-            <a href="{{ route('items.show', $item->id) }}">
+            <a href="{{ route('web.show', $item->id) }}">
               <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('images/placeholder.png') }}"
                   alt="{{ $item->name }}"
                   class="img-fluid"

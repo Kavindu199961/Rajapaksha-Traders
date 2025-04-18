@@ -2,13 +2,23 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">All Categories</h2>
+    <h2 class="mb-0 fs-2">All Categories</h2>
     <a href="{{ route('category.create') }}" class="btn btn-primary">+ Add Category</a>
 </div>
 
 @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
+
+<!-- Search Form -->
+<form action="{{ route('category.index') }}" method="GET" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search category..." value="{{ request('search') }}">
+        <button class="btn btn-outline-secondary" type="submit">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
 
 @if($categories->count())
     <div class="row g-4">
@@ -36,6 +46,11 @@
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-4">
+        {{ $categories->links() }}
     </div>
 @else
     <div class="alert alert-info">No categories found.</div>

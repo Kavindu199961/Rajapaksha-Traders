@@ -133,52 +133,74 @@
     </section>
 
     <!-- Contact Form -->
-    <section class="py-5 bg-white">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card border-0 shadow">
-                        <div class="card-body p-4 p-md-5">
-                            <h2 class="fw-bold primery-color text-center mb-4">Send Us a Message</h2>
-                            <form id="contactForm">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="name" class="form-label">Your Name</label>
-                                        <input type="text" class="form-control" id="name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="subject" class="form-label">Subject</label>
-                                        <input type="text" class="form-control" id="subject" required>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="message" class="form-label">Message</label>
-                                        <textarea class="form-control" id="message" rows="5" required></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="newsletter">
-                                            <label class="form-check-label" for="newsletter">
-                                                Subscribe to our newsletter
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center mt-3">
-                                        <button type="submit" class="btn btn-primary btn-lg px-4">
-                                            <i class="bi bi-send-fill me-2"></i> Send Message
-                                        </button>
+    <!-- Include SweetAlert2 in your main layout (like app.blade.php) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="fw-bold primery-color text-center mb-4">Send Us a Message</h2>
+                        <form action="{{ route('send.inquiry') }}" method="POST">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to our newsletter
+                                        </label>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                                <div class="col-12 text-center mt-3">
+                                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                                        <i class="bi bi-send-fill me-2"></i> Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Success Popup -->
+                        @if(session('success'))
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Message Sent!',
+                                text: '{{ session('success') }}',
+                                showConfirmButton: true,
+                                confirmButtonColor: '#0d6efd',
+                                confirmButtonText: 'OK',
+                                background: '#f8f9fa',
+                                iconColor: '#28a745'
+                            });
+                        </script>
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Social Media -->
     <section class="py-5 bg-light">

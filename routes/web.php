@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Http\Controllers\StoryController;
 use App\Models\Story;
 use App\Http\Controllers\TransportBookController;
+use App\Http\Controllers\ContactController;
 
 // Ensure the StoryController class exists in the specified namespace
 // If it doesn't exist, create it in the App\Http\Controllers directory
@@ -19,7 +20,7 @@ use App\Http\Controllers\TransportBookController;
 Route::get('/', function () {
     $categories = Category::orderBy('created_at', 'desc')->get();
     $ads = Ad::orderBy('created_at', 'desc')->get();
-    $items = Item::orderBy('created_at', 'desc')->get();
+    $items = Item::orderBy('created_at', 'desc')->take(16)->get();
     return view('web.index', compact('categories', 'ads', 'items'));
 });
 
@@ -37,7 +38,18 @@ Route::get('/transport', function () {
 
 Route::get('/story', [StoryController::class, 'show'])->name('web.story.show');
 
-Route::get('/category/{id}', [CategoryController::class, 'showCategoryItems'])->name('admin.category.items');
+//item cliekd after show page 
+Route::get('items/{item}', [ItemController::class, 'show'])->name('web.show');
+
+Route::get('/search', [ItemController::class, 'search'])->name('items.search');
+
+Route::get('/products', [ItemController::class, 'allProducts'])->name('products.all');
+
+
+
+Route::get('/category/{id}', [CategoryController::class, 'showCategoryItems'])->name('web.items');
+
+Route::post('/send-inquiry', [ContactController::class, 'sendInquiry'])->name('send.inquiry');
 
 
 
@@ -77,7 +89,7 @@ Route::middleware('auth')->group(function () {
         Route::get('items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
         Route::put('items/{item}', [ItemController::class, 'update'])->name('items.update');
         Route::delete('items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
-        Route::get('items/{item}', [ItemController::class, 'show'])->name('items.show');
+     
         
         //story route
         Route::get('story', [StoryController::class, 'index'])->name('story.index');

@@ -52,6 +52,37 @@ body {
   color: #D4AF37 !important;
 }
 
+.hover-primary:hover {
+  color: #D4AF37 !important;
+  transition: color 0.2s ease;
+}
+
+header {
+  z-index: 1030;
+}
+
+.navbar-toggler {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler svg {
+  fill: currentColor;
+}
+
+/* Responsive logo sizing */
+@media (max-width: 767.98px) {
+  header img {
+    height: 42px !important;
+  }
+  .searchinput {
+    margin-right: 0 !important;
+    max-width:350px;
+  }
+
+}
+
 
 .btn-primary {
   --bs-btn-color: #fff;

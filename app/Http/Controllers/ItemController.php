@@ -11,14 +11,24 @@ class ItemController extends Controller
 
     public function show(Item $item)
 {
-    return view('admin.item.show', compact('item'));
+    return view('web.show', compact('item'));
 }
 
-    public function index()
-    {
-        $items = Item::with('category')->get();
-        return view('admin.item.index', compact('items'));
+public function index(Request $request)
+{
+    $query = Item::with('category')->latest();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('name', 'like', "%{$search}%");
     }
+
+    $items = $query->paginate(10)->withQueryString();
+
+    return view('admin.item.index', compact('items'));
+}
+
+
 
     public function create()
     {
@@ -85,4 +95,22 @@ class ItemController extends Controller
         $item->delete();
         return redirect()->route('items.index')->with('success', 'Item deleted.');
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    $items = Item::where('name', 'like', "%{$query}%")
+                ->orWhere('description', 'like', "%{$query}%")
+                ->paginate(12); 
+
+    return view('web.search_results', compact('items', 'query'));
+}
+
+public function allProducts()
+{
+    $items = Item::paginate(20); // 20 items per page
+    return view('web.product', compact('items'));
+}
+
 }
