@@ -173,6 +173,12 @@
       </div>
   </div>
 </section>
+<section>
+
+<!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-b4ba8fc9-823d-4646-8fb8-e342ef2b32b8" data-elfsight-app-lazy></div>
+</section><br>
 
 <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
   <!-- SVG Definitions (hidden) -->
@@ -245,8 +251,4 @@
     </div>
   </div>
 </div>
-
-
-
-
-    @endsection
+ @endsection
