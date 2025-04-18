@@ -123,7 +123,7 @@
 
         <div class="footer">
             If you have any questions, feel free to contact our support team.<br>
-            &copy; {{ date('Y') }} Your Company Name. All rights reserved.
+            &copy; {{ date('Y') }} Rajapaksha Traders Powerd by CeylonGIT.
         </div>
     </div>
 </body>

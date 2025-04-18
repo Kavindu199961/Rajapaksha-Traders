@@ -170,7 +170,7 @@
                                     </div>
                                     <h4 class="mb-2" style="color: #2c3e50;">Instant WhatsApp Booking</h4>
                                     <p class="text-muted mb-3">Get immediate confirmation via WhatsApp</p>
-                                    <a href="https://wa.me/94771234567?text=I%20want%20to%20hire%20your%20lorry%20for..." class="btn btn-success rounded-pill px-4" style="background-color: #25D366; border-color: #25D366;">
+                                    <a href="https://wa.me/+94714829005" class="btn btn-success rounded-pill px-4" style="background-color: #25D366; border-color: #25D366;">
                                         <i class="bi bi-whatsapp me-2"></i> Message Now
                                     </a>
                                 </div>
@@ -182,7 +182,7 @@
                                     </div>
                                     <h4 class="mb-2" style="color: #2c3e50;">Direct Call Booking</h4>
                                     <p class="text-muted mb-3">Speak with our transport manager</p>
-                                    <a href="tel:+94112345678" class="btn btn-primary rounded-pill px-4">
+                                    <a href="tel:+94714829005" class="btn btn-primary rounded-pill px-4">
                                         <i class="bi bi-telephone me-2"></i> Call Now
                                     </a>
                                 </div>

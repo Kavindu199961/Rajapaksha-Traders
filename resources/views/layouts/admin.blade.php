@@ -118,6 +118,8 @@
             @yield('content')
 
             @yield('styles')
+
+            @yield('scripts')
         </div>
     </main>
     <footer class="text-center mt-4 p-3">

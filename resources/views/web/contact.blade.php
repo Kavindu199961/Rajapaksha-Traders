@@ -30,7 +30,7 @@
                             </div>
                             <h5 class="fw-bold">WhatsApp</h5>
                             <p class="mb-3">Chat with us instantly</p>
-                            <a href="https://wa.me/94771234567" class="btn btn-success rounded-pill px-4">
+                            <a href="https://wa.me/+94714829005" class="btn btn-success rounded-pill px-4">
                                 <i class="bi bi-whatsapp me-2"></i> Message Now
                             </a>
                             <p class="mt-2 small text-muted">Typically replies within 30 minutes</p>
@@ -47,12 +47,12 @@
                             </div>
                             <h5 class="fw-bold">Phone Call</h5>
                             <p class="mb-3">Speak directly with our team</p>
-                            <a href="tel:+94112345678" class="btn btn-primary rounded-pill px-4">
+                            <a href="tel:+94714829005" class="btn btn-primary rounded-pill px-4">
                                 <i class="bi bi-telephone me-2"></i> Call Now
                             </a>
                             <div class="mt-2">
-                                <p class="small mb-1">Main: +94 11 234 5678</p>
-                                <p class="small mb-1">Mobile: +94 77 123 4567</p>
+                                <p class="small mb-1">Main: 0352 284 218</p>
+                                <p class="small mb-1">Mobile: +94 71 482 9005</p>
                             </div>
                         </div>
                     </div>

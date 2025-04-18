@@ -156,10 +156,10 @@
               <a href="/" class="nav-link px-2 py-1 text-dark hover-primary">Home</a>
             </li>
             <li class="nav-item">
-              <a href="/about" class="nav-link px-2 py-1 text-dark hover-primary">About</a>
+              <a href="/products" class="nav-link px-2 py-1 text-dark hover-primary">Products</a>
             </li>
             <li class="nav-item">
-              <a href="/products" class="nav-link px-2 py-1 text-dark hover-primary">Products</a>
+              <a href="/about" class="nav-link px-2 py-1 text-dark hover-primary">About</a>
             </li>
             <li class="nav-item">
               <a href="/contact" class="nav-link px-2 py-1 text-dark hover-primary">Contact</a>
@@ -180,6 +180,10 @@
 
       <main>
         @yield('content')
+
+        @yield('scripts')
+        
+        @yield('styles')
     </main>
 
     <footer class="footer py-5 footer-dark">
@@ -228,22 +232,23 @@
           <h5 class="widget-title">Quick Links</h5>
           <ul class="menu-list list-unstyled">
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Offers</a>
+              <a href="/" class="nav-link footer-link">Home</a>
             </li>
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Discount Coupons</a>
+              <a href="/products?" class="nav-link footer-link">Products</a>
+              
             </li>
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Stores</a>
+            <a href="/about" class="nav-link footer-link">About</a>
             </li>
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Track Order</a>
+              <a href="/contact" class="nav-link footer-link">Contact</a>
             </li>
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Shop</a>
+              <a href="/transport" class="nav-link footer-link">Transport</a>
             </li>
             <li class="menu-item mb-2">
-              <a href="#" class="nav-link footer-link">Info</a>
+              <a href="/story" class="nav-link footer-link">Our Story</a>
             </li>
           </ul>
         </div>

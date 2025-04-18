@@ -57,14 +57,15 @@
                 </div>
 
                 {{-- Image Upload --}}
+         
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Upload Image</label>
                     <input type="file" name="image" class="form-control shadow-sm" accept="image/*" onchange="previewImage(event)">
                     <div class="mt-3">
                         <img id="imagePreview" 
-                             src="{{ !empty($item->image) ? asset('storage/' . $item->image) : '#' }}"
-                             class="img-thumbnail {{ !empty($item->image) ? '' : 'd-none' }}" 
-                             width="150" alt="Image Preview">
+                            src="{{ !empty($item->image) ? asset('storage/' . $item->image) : '#' }}"
+                            class="img-thumbnail {{ !empty($item->image) ? '' : 'd-none' }}" 
+                            width="150" alt="Image Preview">
                     </div>
                 </div>
 
@@ -84,16 +85,32 @@
 @section('scripts')
 <script>
     function previewImage(event) {
-        const imagePreview = document.getElementById('imagePreview');
-        const file = event.target.files[0];
+        const input = event.target;
+        const preview = document.getElementById('imagePreview');
 
-        if (file) {
-            imagePreview.src = URL.createObjectURL(file);
-            imagePreview.classList.remove('d-none');
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please upload a valid image file.');
+                input.value = '';
+                preview.src = '#';
+                preview.classList.add('d-none');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+            }
+
+            reader.readAsDataURL(file);
         } else {
-            imagePreview.src = '#';
-            imagePreview.classList.add('d-none');
+            preview.src = '#';
+            preview.classList.add('d-none');
         }
     }
 </script>
-@endsection
+
