@@ -14,88 +14,126 @@
 
     <!-- Main Content -->
     <section class="py-5 bg-light">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Sidebar -->
-                <aside class="col-lg-3 mb-4">
-                    <div class="story-sidebar p-4 bg-white shadow-sm rounded">
-                        <h5 class="mb-3 text-primary">Our Journey</h5>
-                        <ul class="list-unstyled story-nav">
-                            @foreach($stories as $story)
-                            <li class="mb-2 position-relative">
-                                <a href="#story-{{ $story->id }}" class="d-flex align-items-center story-nav-link">
-                                    <span class="story-dot"></span>
-                                    <span class="story-title">{{ $story->title }}</span>
-                                    <span class="story-date">{{ $story->created_at->format('M Y') }}</span>
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-                        <div class="progress-container mt-4">
-                            <div class="progress-bar" id="reading-progress"></div>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="col-lg-3 mb-4">
+                <div class="story-sidebar p-4 bg-white shadow-sm rounded">
+                    <h5 class="mb-3 text-primary">Our Journey</h5>
+                    <ul class="list-unstyled story-nav">
+                        @foreach($stories as $story)
+                        <li class="mb-2 position-relative">
+                            <a href="#story-{{ $story->id }}" class="d-flex align-items-center story-nav-link">
+                                <span class="story-dot"></span>
+                                <span class="story-title">{{ $story->title }}</span>
+                                <span class="story-date">{{ $story->created_at->format('M Y') }}</span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                    <div class="progress-container mt-4">
+                        <div class="progress-bar" id="reading-progress"></div>
                     </div>
-                </aside>
+                </div>
+            </aside>
 
-                <!-- Story Timeline -->
-                <div class="col-lg-9">
-                    @if($stories && $stories->count() > 0)
-                        @foreach($stories->sortByDesc('created_at') as $index => $story)
-                        <div class="story-card mb-5" id="story-{{ $story->id }}" data-aos="fade-up">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    @if($story->image)
-                                    <div class="story-image-wrapper">
-                                        <img src="{{ asset('storage/'.$story->image) }}" alt="{{ $story->title }}" class="img-fluid rounded shadow">
-                                    </div>
-                                    @endif
+            <!-- Story Timeline -->
+            <div class="col-lg-9">
+                @if($stories && $stories->count() > 0)
+                    @foreach($stories->sortByDesc('created_at') as $index => $story)
+                    <div class="story-card mb-5" id="story-{{ $story->id }}" data-aos="fade-up">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                @if($story->image)
+                                <div class="story-image-wrapper">
+                                    <img src="{{ asset('storage/'.$story->image) }}" alt="{{ $story->title }}" class="img-fluid rounded shadow">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="story-content p-4">
-                                        <h2 class="mb-3">{{ $story->title }}</h2>
-                                        <div class="story-text">{!! $story->content !!}</div>
-                                        <div class="story-meta mt-3 text-muted">
-                                            <i class="far fa-calendar-alt mr-1"></i> {{ $story->created_at->format('M d, Y') }}
-                                        </div>
+                                @endif
+                            </div>
+                            <div class="col-md-6">
+                                <div class="story-content p-4">
+                                    <h2 class="mb-3">{{ $story->title }}</h2>
+                                    <div class="story-text">{!! $story->content !!}</div>
+                                    <div class="story-meta mt-3 text-muted">
+                                        <i class="far fa-calendar-alt mr-1"></i> {{ $story->created_at->format('M d, Y') }}
                                     </div>
                                 </div>
                             </div>
-
-                            @if($story->galleries->count() > 0)
-                            <div class="story-gallery mt-4">
-                                <h5 class="text-center mb-3">Gallery</h5>
-                                <div class="row">
-                                    @foreach($story->galleries as $gallery)
-                                    <div class="col-md-4 mb-3">
-                                        <a href="{{ asset('storage/'.$gallery->image_path) }}" data-lightbox="gallery-{{ $story->id }}" data-title="{{ $story->title }}">
-                                            <img src="{{ asset('storage/'.$gallery->image_path) }}" class="img-fluid rounded shadow-sm" alt="Gallery Image">
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            @endif
                         </div>
-                        @if(!$loop->last)
-                        <div class="story-divider my-5">
-                            <div class="divider-line"></div>
-                            <div class="divider-icon">
-                                <i class="fas fa-leaf"></i>
+
+                        @if($story->galleries->count() > 0)
+                        <div class="story-gallery mt-4">
+                            <h5 class="text-center mb-3">Gallery</h5>
+                            <div class="row">
+                                @foreach($story->galleries as $gallery)
+                                <div class="col-md-4 mb-3">
+                                    <img 
+                                        src="{{ asset('storage/'.$gallery->image_path) }}" 
+                                        class="img-fluid rounded shadow-sm previewable-image" 
+                                        data-src="{{ asset('storage/'.$gallery->image_path) }}" 
+                                        data-title="{{ $story->title }} - Gallery Image" 
+                                        alt="Gallery Image" 
+                                        style="cursor: pointer;">
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                         @endif
-                        @endforeach
-                    @else
-                    <div class="text-center py-5">
-                        <h3>No stories available at the moment</h3>
-                        <p>Please check back later</p>
+                    </div>
+
+                    @if(!$loop->last)
+                    <div class="story-divider my-5">
+                        <div class="divider-line"></div>
+                        <div class="divider-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
                     </div>
                     @endif
+                    @endforeach
+                @else
+                <div class="text-center py-5">
+                    <h3>No stories available at the moment</h3>
+                    <p>Please check back later</p>
                 </div>
+                @endif
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Image Preview Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-light">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="imageModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid rounded shadow" alt="Preview Image">
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- JS for Preview Modal -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.previewable-image').forEach(function (img) {
+            img.addEventListener('click', function () {
+                const src = this.getAttribute('data-src');
+                const title = this.getAttribute('data-title');
+                document.getElementById('modalImage').src = src;
+                document.getElementById('imageModalLabel').textContent = title;
+                const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                modal.show();
+            });
+        });
+    });
+</script>
+
+</div>
+
 @endsection
 
 @section('styles')
@@ -159,7 +197,7 @@
         transition: transform 0.3s ease;
     }
 
-    .story-gallery img:hover {
+    .sllery img:hover {
         transform: scale(1.03);
     }
 
@@ -380,5 +418,8 @@
         // Initialize
         updateProgressBar();
     });
+
+
+
 </script>
 @endsection
