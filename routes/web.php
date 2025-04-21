@@ -51,6 +51,8 @@ Route::get('/category/{id}', [CategoryController::class, 'showCategoryItems'])->
 
 Route::post('/send-inquiry', [ContactController::class, 'sendInquiry'])->name('send.inquiry');
 
+Route::post('/send-transport-inquiry', [TransportBookController::class, 'sendBokking'])->name('send.transport.inquiry');
+
 
 
 Route::get('/dashboard', function () {
@@ -108,7 +110,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Public booking form
-Route::post('/hire', [TransportBookController::class, 'store'])->name('transport.store');
+    Route::post('/transport/book', [TransportBookController::class, 'store'])->name('transport.book');
 
 // Admin routes
 Route::middleware(['auth'])->prefix('admin')->group(function () {

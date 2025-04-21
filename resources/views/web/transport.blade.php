@@ -217,7 +217,7 @@
                         
                         <div class="booking-form-container p-4" style="border-radius: 12px; background-color: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
                             <h4 class="text-center mb-4" style="color: #2c3e50;">Send Booking Request</h4>
-                            <form id="hireForm">
+                            <form action="{{ route('send.transport.inquiry') }}" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -276,7 +276,10 @@
                                     </div>
                                     <div class="col-12 text-center mt-4">
                                         <button type="submit" class="btn btn-primary btn-lg px-4 rounded-pill" id="submitBtn" style="background-color: #4e73df; border-color: #4e73df; min-width: 180px;">
-                                            <i class="bi bi-send-fill me-2"></i> Send Request
+                                            <span id="buttonText">
+                                                <i class="bi bi-send-fill me-2"></i> Send Request
+                                            </span>
+                                            <span id="buttonSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                 </div>
@@ -287,39 +290,28 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Success Modal -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0" style="border-radius: 15px; overflow: hidden;">
-                <div class="modal-body p-5 text-center">
-                    <div class="icon-box bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center rounded-circle mb-4" style="width: 80px; height: 80px;">
-                        <i class="bi bi-check2-circle fs-1"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3" style="color: #2c3e50;">Request Submitted!</h4>
-                    <p class="text-muted mb-4">Your transport request has been received successfully. Our team will contact you shortly to confirm the details.</p>
-                    <button type="button" class="btn btn-success rounded-pill px-4" data-bs-dismiss="modal" style="min-width: 120px;">Got It</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: '{{ session('success') }}',
+            showConfirmButton: true,
+            confirmButtonColor: '#0d6efd',
+            confirmButtonText: 'OK',
+            background: '#f8f9fa',
+            iconColor: '#28a745'
+        });
+    </script>
+    @endif 
 
-    <!-- Error Modal -->
-    <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0" style="border-radius: 15px; overflow: hidden;">
-                <div class="modal-body p-5 text-center">
-                    <div class="icon-box bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center rounded-circle mb-4" style="width: 80px; height: 80px;">
-                        <i class="bi bi-exclamation-triangle fs-1"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3" style="color: #2c3e50;">Submission Error</h4>
-                    <p class="text-muted mb-2">There was an error submitting your request.</p>
-                    <p id="errorMessage" class="text-danger mb-4"></p>
-                    <button type="button" class="btn btn-danger rounded-pill px-4" data-bs-dismiss="modal" style="min-width: 120px;">Try Again</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+
 
     <style>
         .hire-card:hover {
@@ -368,106 +360,7 @@
     </style>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('hireForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate form
-            if (!form.checkValidity()) {
-                e.stopPropagation();
-                form.classList.add('was-validated');
-                return;
-            }
-
-            // Change button state
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
-            submitBtn.disabled = true;
-
-            // Create FormData object
-            const formData = new FormData(form);
-
-            // Send request
-            fetch('/hire', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: formData
-            })
-            .then(async response => {
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    // Handle validation errors
-                    if (data.errors) {
-                        let errorMsg = '';
-                        for (const field in data.errors) {
-                            const input = form.querySelector(`[name="${field}"]`);
-                            if (input) {
-                                input.classList.add('is-invalid');
-                                const feedback = input.nextElementSibling;
-                                if (feedback && feedback.classList.contains('invalid-feedback')) {
-                                    feedback.textContent = data.errors[field][0];
-                                }
-                            }
-                            errorMsg += `${data.errors[field][0]}\n`;
-                        }
-                        throw new Error(errorMsg);
-                    }
-                    throw new Error(data.message || 'Server returned an error');
-                }
-                
-                return data;
-            })
-            .then(data => {
-                if (data.success) {
-                    successModal.show();
-                    form.reset();
-                    form.classList.remove('was-validated');
-                } else {
-                    throw new Error(data.message || 'Unknown error occurred');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('errorMessage').textContent = error.message;
-                errorModal.show();
-            })
-            .finally(() => {
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            });
-        });
-
-        // Clear validation errors when user starts typing
-        form.addEventListener('input', function(e) {
-            const input = e.target;
-            if (input.tagName === 'INPUT' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
-                input.classList.remove('is-invalid');
-                const feedback = input.nextElementSibling;
-                if (feedback && feedback.classList.contains('invalid-feedback')) {
-                    feedback.textContent = input.getAttribute('data-original-feedback') || '';
-                }
-            }
-        });
-
-        // Store original feedback messages
-        document.querySelectorAll('.invalid-feedback').forEach(feedback => {
-            const input = feedback.previousElementSibling;
-            if (input) {
-                input.setAttribute('data-original-feedback', feedback.textContent);
-            }
-        });
-    });
-
-  
     document.addEventListener("DOMContentLoaded", function () {
         const previewImgs = document.querySelectorAll(".preview-img");
         const modalImage = document.getElementById("modalImage");
@@ -669,6 +562,3 @@
         this.reset();
     });
 </script>
-
-
-@endsection
