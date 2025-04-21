@@ -6,9 +6,21 @@
     <a href="{{ route('category.create') }}" class="btn btn-primary">+ Add Category</a>
 </div>
 
+    
 @if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: '{{ session('success') }}',
+            showConfirmButton: true,
+            confirmButtonColor: '#0d6efd',
+            confirmButtonText: 'OK',
+            background: '#f8f9fa',
+            iconColor: '#28a745'
+        });
+    </script>
+    @endif 
 
 <!-- Search Form -->
 <form action="{{ route('category.index') }}" method="GET" class="mb-4">

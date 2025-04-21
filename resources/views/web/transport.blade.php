@@ -535,7 +535,6 @@
     }
 </style>
 
-
 @endsection
 
 @section('scripts')
