@@ -11,7 +11,7 @@
     <script>
         Swal.fire({
             icon: 'success',
-            title: 'Message Sent!',
+            title: '',
             text: '{{ session('success') }}',
             showConfirmButton: true,
             confirmButtonColor: '#0d6efd',
