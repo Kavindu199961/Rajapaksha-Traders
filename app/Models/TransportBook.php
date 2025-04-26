@@ -12,10 +12,12 @@ class TransportBook extends Model
     protected $fillable = [
         'name',
         'phone',
+        'email',
         'required_date',
         'duration',
         'goods_type',
         'additional_details',
-        'completed'
+        'completed',
     ];
+    
 }

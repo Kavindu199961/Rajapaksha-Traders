@@ -229,6 +229,14 @@
                                         <div class="invalid-feedback">Please provide your name.</div>
                                     </div>
                                     <div class="col-md-6">
+                                        <label for="email" class="form-label fw-medium">Email Address <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                                            <input type="email" class="form-control border-start-0" id="email" name="email" placeholder="example@domain.com" required>
+                                        </div>
+                                        <div class="invalid-feedback">Please provide a valid email address.</div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="phone" class="form-label fw-medium">Phone Number <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-end-0"><i class="bi bi-telephone text-muted"></i></span>
@@ -240,7 +248,7 @@
                                         <label for="date" class="form-label fw-medium">Required Date <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-end-0"><i class="bi bi-calendar text-muted"></i></span>
-                                            <input type="date" class="form-control border-start-0" id="date" name="date" required>
+                                            <input type="date" class="form-control border-start-0" id="date" name="required_date" required>
                                         </div>
                                         <div class="invalid-feedback">Please select a date.</div>
                                     </div>
@@ -263,7 +271,7 @@
                                         <label for="goods" class="form-label fw-medium">Type of Goods <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light border-end-0"><i class="bi bi-box-seam text-muted"></i></span>
-                                            <input type="text" class="form-control border-start-0" id="goods" name="goods" placeholder="e.g., Construction materials, Furniture" required>
+                                            <input type="text" class="form-control border-start-0" id="goods" name="goods_type" placeholder="e.g., Construction materials, Furniture" required>
                                         </div>
                                         <div class="invalid-feedback">Please specify the type of goods.</div>
                                     </div>
@@ -271,7 +279,7 @@
                                         <label for="details" class="form-label fw-medium">Additional Details</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-light align-items-start pt-2 border-end-0"><i class="bi bi-info-circle text-muted"></i></span>
-                                            <textarea class="form-control border-start-0" id="details" name="details" rows="3" placeholder="Any special requirements or instructions..."></textarea>
+                                            <textarea class="form-control border-start-0" id="details" name="additional_details" rows="3" placeholder="Any special requirements or instructions..."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center mt-4">

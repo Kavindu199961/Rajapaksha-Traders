@@ -51,7 +51,8 @@ Route::get('/category/{id}', [CategoryController::class, 'showCategoryItems'])->
 
 Route::post('/send-inquiry', [ContactController::class, 'sendInquiry'])->name('send.inquiry');
 
-Route::post('/send-transport-inquiry', [TransportBookController::class, 'sendBokking'])->name('send.transport.inquiry');
+Route::post('/send-transport-inquiry', [TransportBookController::class, 'sendBooking'])->name('send.transport.inquiry');
+
 
 
 
