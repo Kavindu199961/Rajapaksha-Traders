@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () { 
         Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
         Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
